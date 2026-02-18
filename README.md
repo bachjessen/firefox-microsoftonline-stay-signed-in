@@ -20,6 +20,15 @@ This addon automatically ticks the "Don't show this again" checkbox and clicks "
 making sure that you only see the screen for a brief moment and, most importantly, that you
 do not need to interact with it at all.
 
+## Popup settings
+
+The extension popup includes a small dropdown that lets you choose how aggressive the automation should be:
+
+1. `Only handle "Stay signed in?"` (default)
+2. `Also dismiss known Microsoft modals (Experimental)`
+
+The experimental option tries to close known Microsoft modal popups (for example popups with a "Close" button in Microsoft security pages). It is best-effort and will not cover every popup scenario.
+
 ## How to test the addon
 
 After cloning the repository, you can use the `test-page.html` file for testing the add-on.

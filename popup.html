@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Microsoft Online: Stay signed in</title>
+        <link rel="stylesheet" href="popup.css">
+    </head>
+    <body>
+        <main class="popup">
+            <h1>Microsoft Online: Stay signed in</h1>
+
+            <label for="experimentalPopupMode">Popup handling</label>
+            <select id="experimentalPopupMode">
+                <option value="off">Only handle "Stay signed in?"</option>
+                <option value="dismiss-known-microsoft-modals">Also dismiss known Microsoft modals (Experimental)</option>
+            </select>
+
+            <p class="help">
+                Experimental mode attempts to close known Microsoft modals by clicking their "Close" button.
+                It will not cover every popup scenario.
+            </p>
+
+            <p id="saveStatus" class="saveStatus" aria-live="polite"></p>
+        </main>
+
+        <script src="experimental-settings.js"></script>
+        <script src="popup.js"></script>
+    </body>
+</html>
