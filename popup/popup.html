@@ -8,12 +8,11 @@
 </head>
 <body>
   <main>
-    <header><small>STAY SIGNED IN</small><h1 id="saved">Measure your time saved</h1><p id="count"></p></header>
-    <section>
-      <div class="stat"><span>Average manual time</span><strong id="average">Not measured</strong></div>
-      <button id="measure" type="button">Measure next prompt</button>
-      <p id="measureStatus" class="muted"></p>
-    </section>
+    <header>
+      <small>STAY SIGNED IN</small>
+      <h1 id="saved">0 seconds saved</h1>
+      <p id="count">0 prompts handled</p>
+    </header>
     <section>
       <label class="row"><span>Check “Don't show this again”</span><input id="checkCheckbox" type="checkbox"></label>
       <fieldset>
@@ -23,7 +22,7 @@
         <label><input type="radio" name="response" value="none"> Do nothing</label>
       </fieldset>
     </section>
-    <p class="muted">Settings and statistics stay in Firefox on this device.</p>
+    <p class="muted">Estimated at 12 seconds saved per handled prompt. Data stays on this device.</p>
   </main>
   <script src="popup.js"></script>
 </body>

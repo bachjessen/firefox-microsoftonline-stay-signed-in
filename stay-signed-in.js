@@ -6,10 +6,7 @@ const TIMEOUT_MS = 15_000;
 const DEFAULTS = {
   checkCheckbox: true,
   response: "yes",
-  measureNext: false,
   handledCount: 0,
-  sampleCount: 0,
-  totalManualMs: 0,
 };
 
 function waitFor(selector) {
@@ -29,26 +26,10 @@ async function settings() {
   return {...DEFAULTS, ...(await browser.storage.local.get(DEFAULTS))};
 }
 
-async function recordManualSample(button, startedAt) {
-  await browser.storage.local.set({measureNext: false});
-  button.addEventListener("click", async () => {
-    const current = await settings();
-    await browser.storage.local.set({
-      sampleCount: current.sampleCount + 1,
-      totalManualMs: current.totalManualMs + performance.now() - startedAt,
-    });
-  }, {once: true});
-}
-
 async function handlePrompt() {
   const checkbox = await waitFor(CHECKBOX_SELECTOR);
   const yesButton = await waitFor(YES_SELECTOR);
   const current = await settings();
-
-  if (current.measureNext) {
-    await recordManualSample(yesButton, performance.now());
-    return;
-  }
 
   if (current.checkCheckbox && !checkbox.checked) checkbox.click();
   if (current.response === "none") return;
