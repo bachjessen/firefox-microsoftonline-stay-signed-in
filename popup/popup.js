@@ -2,6 +2,7 @@ const SECONDS_SAVED_PER_PROMPT = 12;
 const DEFAULTS = {automationEnabled:true,checkCheckbox:true,response:"yes"};
 const automationToggle = document.querySelector("#automationEnabled");
 const automationOptions = document.querySelector("#automationOptions");
+const dontAskAgainSetting = document.querySelector("#dontAskAgainSetting");
 const checkbox = document.querySelector("#checkCheckbox");
 const syncToggle = document.querySelector("#syncEnabled");
 
@@ -34,6 +35,7 @@ async function render() {
   document.querySelector("#saved").textContent = `${duration(current.totalCount * SECONDS_SAVED_PER_PROMPT)} saved`;
   automationToggle.checked = current.automationEnabled;
   automationOptions.hidden = !current.automationEnabled;
+  dontAskAgainSetting.hidden = current.response !== "yes";
   checkbox.checked = current.checkCheckbox;
   syncToggle.checked = current.syncEnabled;
   document.querySelector(`input[name="response"][value="${current.response}"]`).checked = true;
@@ -45,11 +47,11 @@ async function activeArea() {
 }
 
 automationToggle.addEventListener("change", async () => {
-  (await activeArea()).set({automationEnabled: automationToggle.checked});
+  await (await activeArea()).set({automationEnabled: automationToggle.checked});
 });
 checkbox.addEventListener("change", async () => (await activeArea()).set({checkCheckbox: checkbox.checked}));
 document.querySelectorAll('input[name="response"]').forEach((radio) => radio.addEventListener("change", async () => {
-  if (radio.checked) (await activeArea()).set({response: radio.value});
+  if (radio.checked) await (await activeArea()).set({response: radio.value});
 }));
 
 syncToggle.addEventListener("change", async () => {
