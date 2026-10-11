@@ -1,49 +1,13 @@
-name: Publish to Firefox Add-ons
+name: Public Publishing Disabled
 
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
-concurrency:
-  group: firefox-addons-production
-  cancel-in-progress: false
+permissions: {}
 
 jobs:
-  publish:
+  disabled:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Set unique AMO version
-        run: node -e "const fs=require('fs');const p='manifest.json';const m=JSON.parse(fs.readFileSync(p,'utf8'));m.version='1.2.${{ github.run_number }}';fs.writeFileSync(p,JSON.stringify(m,null,2)+'\n');"
-
-      - name: Lint extension
-        run: npm run lint
-
-      - name: Build extension
-        run: npm run build
-
-      - name: Upload unsigned package
-        uses: actions/upload-artifact@v4
-        with:
-          name: firefox-extension-unsigned-${{ github.run_number }}
-          path: web-ext-artifacts/*.zip
-          if-no-files-found: error
-
-      - name: Submit listed release to Firefox Add-ons
-        run: npx web-ext sign --channel=listed --approval-timeout=0 --amo-metadata=.github/amo-metadata.json --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/** --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
-        env:
-          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
-          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+      - run: echo "Public publishing is intentionally unavailable for this personal fork."

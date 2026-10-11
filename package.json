@@ -1,13 +1,14 @@
 {
-  "name": "microsoft-online-stay-signed-in",
+  "name": "stay-signed-in-actually",
   "version": "1.2.0",
   "private": true,
-  "description": "Firefox extension that automatically confirms Microsoft's stay-signed-in prompt.",
+  "description": "Personal Firefox extension that handles the recurring Microsoft stay-signed-in prompt.",
   "scripts": {
-    "lint": "web-ext lint --ignore-files test-page.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**",
-    "build": "web-ext build --overwrite-dest --ignore-files test-page.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**"
+    "lint": "web-ext lint --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**",
+    "build": "web-ext build --overwrite-dest --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**",
+    "audit": "npm audit --omit=dev --audit-level=high"
   },
   "devDependencies": {
-    "web-ext": "^8.9.0"
+    "web-ext": "10.7.0"
   }
 }

@@ -1,4 +1,6 @@
 /web-ext-artifacts/
 /node_modules/
 /.idea/
+/.vscode/
 /.dot-files/
+.DS_Store
