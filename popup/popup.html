@@ -9,34 +9,33 @@
 <body>
   <main>
     <header>
-      <p class="eyebrow">STAY SIGNED IN</p>
+      <small>STAY SIGNED IN</small>
       <h1 id="saved">0 seconds saved</h1>
-      <p id="count" class="summary">0 prompts handled</p>
+      <p id="count">0 prompts handled</p>
     </header>
 
-    <section aria-labelledby="automation-title">
-      <h2 id="automation-title">When the prompt appears</h2>
-      <fieldset class="choice-group">
-        <legend class="visually-hidden">Choose an automatic response</legend>
-        <label class="choice"><input type="radio" name="response" value="yes"><span><strong>Stay signed in</strong><small>Automatically choose Yes</small></span></label>
-        <label class="choice"><input type="radio" name="response" value="no"><span><strong>Don't stay signed in</strong><small>Automatically choose No</small></span></label>
-        <label class="choice"><input type="radio" name="response" value="none"><span><strong>Ask me every time</strong><small>Leave the prompt untouched</small></span></label>
+    <section>
+      <fieldset>
+        <legend>When the prompt appears</legend>
+        <label><input type="radio" name="response" value="yes"> Stay signed in automatically</label>
+        <label><input type="radio" name="response" value="no"> Decline automatically</label>
+        <label><input type="radio" name="response" value="none"> Ask me every time</label>
       </fieldset>
-      <label class="setting-row">
+
+      <label class="setting">
         <span><strong>Hide future prompts</strong><small>Check “Don't show this again”</small></span>
-        <span class="switch"><input id="checkCheckbox" type="checkbox"><span aria-hidden="true"></span></span>
+        <input id="checkCheckbox" type="checkbox" role="switch">
       </label>
     </section>
 
-    <section aria-labelledby="sync-title">
-      <h2 id="sync-title">Data</h2>
-      <label class="setting-row">
+    <section>
+      <label class="setting">
         <span><strong>Sync across devices</strong><small>Use your browser account for settings and statistics</small></span>
-        <span class="switch"><input id="syncEnabled" type="checkbox"><span aria-hidden="true"></span></span>
+        <input id="syncEnabled" type="checkbox" role="switch">
       </label>
     </section>
 
-    <footer>Time saved is estimated at 12 seconds per handled prompt.</footer>
+    <footer>Estimated at 12 seconds saved per handled prompt.</footer>
   </main>
   <script src="popup.js"></script>
 </body>
