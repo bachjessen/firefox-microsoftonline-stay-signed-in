@@ -1,8 +1,9 @@
 # Microsoft Online: Stay signed in
 
-A small Firefox extension that automatically confirms Microsoft's **Stay signed in?** prompt. It selects **Don't show this again** and clicks **Yes** when the prompt appears.
+A personal Firefox extension fork that controls Microsoft's **Stay signed in?** prompt. It can automatically choose **Yes** or **No**, optionally select **Don't show this again**, and can be disabled from its popup.
 
-[Install from Firefox Add-ons](https://addons.mozilla.org/firefox/addon/ms-online-stay-signed-in/)
+> [!IMPORTANT]
+> This repository is a personal fork of the already published [Microsoft Online: Stay signed in extension on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/ms-online-stay-signed-in/). It is maintained for the repository owner's personal use and is not the official source or a replacement for the published extension.
 
 ![Microsoft's Stay signed in prompt](screenshot.png)
 
@@ -30,18 +31,18 @@ npx web-ext run
 
 ## Releases
 
-CI validates every push and pull request and uploads an unsigned ZIP artifact. Releases are manual and restricted to the repository owner. The release workflow submits the extension to Mozilla Add-ons for unlisted signing, so it is not published in the public Firefox Add-ons directory.
+CI validates every push and pull request and uploads an unsigned ZIP artifact. This personal fork must not be submitted as a listed public Firefox Add-ons extension without a separate, explicit publication decision by the repository owner.
 
-Configure these GitHub Actions repository secrets:
+The repository contains Mozilla Add-ons tooling for signing and submission. Configure these GitHub Actions repository secrets only when that tooling is intentionally used:
 
 - `AMO_JWT_ISSUER`
 - `AMO_JWT_SECRET`
 
-Create them in the Mozilla Add-ons Developer Hub. Mozilla review and signing happen after submission; the workflow does not treat its source ZIP as a signed XPI.
+Mozilla review and signing happen after submission; a source ZIP artifact is not a signed XPI.
 
 ## Attribution
 
-The icon comes from [Google Material Symbols](https://fonts.google.com/icons) and is used under the [Creative Commons Attribution-ShareAlike 3.0 license](https://creativecommons.org/licenses/by-sa/3.0/).
+This repository is derived from the published [Microsoft Online: Stay signed in extension](https://addons.mozilla.org/firefox/addon/ms-online-stay-signed-in/). The icon comes from [Google Material Symbols](https://fonts.google.com/icons) and is used under the [Creative Commons Attribution-ShareAlike 3.0 license](https://creativecommons.org/licenses/by-sa/3.0/).
 
 ## License
 
