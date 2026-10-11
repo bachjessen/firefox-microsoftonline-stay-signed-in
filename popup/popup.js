@@ -15,11 +15,15 @@ async function ensureDeviceId(local) {
   return deviceId;
 }
 
+function totalCount(handledCounts) {
+  return Object.values(handledCounts).reduce((sum, count) => sum + count, 0);
+}
+
 async function state() {
   const local = await browser.storage.local.get({syncEnabled:false,deviceId:"",handledCount:0,...DEFAULTS});
   if (!local.syncEnabled) return {...local, totalCount: local.handledCount};
   const synced = await browser.storage.sync.get({handledCounts:{},...DEFAULTS});
-  return {...local, ...synced, totalCount: Object.values(synced.handledCounts).reduce((sum, count) => sum + count, 0)};
+  return {...local, ...synced, totalCount: totalCount(synced.handledCounts)};
 }
 
 async function render() {
@@ -43,22 +47,16 @@ document.querySelectorAll('input[name="response"]').forEach((radio) => radio.add
 
 syncToggle.addEventListener("change", async () => {
   const local = await browser.storage.local.get({deviceId:"",handledCount:0,...DEFAULTS});
+  const id = await ensureDeviceId(local);
+
   if (syncToggle.checked) {
-    const id = await ensureDeviceId(local);
     const synced = await browser.storage.sync.get({handledCounts:{},...DEFAULTS});
-    await browser.storage.sync.set({
-      checkCheckbox: local.checkCheckbox,
-      response: local.response,
-      handledCounts: {...synced.handledCounts, [id]: Math.max(synced.handledCounts[id] || 0, local.handledCount)},
-    });
+    await browser.storage.sync.set({checkCheckbox:local.checkCheckbox,response:local.response,handledCounts:{...synced.handledCounts,[id]:Math.max(synced.handledCounts[id] || 0,local.handledCount)}});
   } else {
     const synced = await browser.storage.sync.get({handledCounts:{},...DEFAULTS});
-    await browser.storage.local.set({
-      checkCheckbox: synced.checkCheckbox,
-      response: synced.response,
-      handledCount: Object.values(synced.handledCounts).reduce((sum, count) => sum + count, 0),
-    });
+    await browser.storage.local.set({checkCheckbox:synced.checkCheckbox,response:synced.response,handledCount:synced.handledCounts[id] || 0});
   }
+
   await browser.storage.local.set({syncEnabled: syncToggle.checked});
   await render();
 });
