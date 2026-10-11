@@ -15,25 +15,33 @@
     </header>
 
     <section>
-      <fieldset>
-        <legend>When the prompt appears</legend>
-        <label><input type="radio" name="response" value="yes"> Stay signed in automatically</label>
-        <label><input type="radio" name="response" value="no"> Decline automatically</label>
-        <label><input type="radio" name="response" value="none"> Ask me every time</label>
-      </fieldset>
-
       <label class="setting">
-        <span><strong>Hide future prompts</strong><small>Check “Don't show this again”</small></span>
-        <input id="checkCheckbox" type="checkbox" role="switch">
+        <span><strong>Enable automation</strong><small>Handle the Microsoft prompt automatically</small></span>
+        <input id="automationEnabled" type="checkbox" role="switch">
       </label>
     </section>
 
-    <section>
-      <label class="setting">
-        <span><strong>Sync across devices</strong><small>Use your browser account for settings and statistics</small></span>
-        <input id="syncEnabled" type="checkbox" role="switch">
-      </label>
-    </section>
+    <div id="automationOptions">
+      <section>
+        <fieldset>
+          <legend>When the prompt appears</legend>
+          <label><input type="radio" name="response" value="yes"> Stay signed in automatically</label>
+          <label><input type="radio" name="response" value="no"> Decline automatically</label>
+        </fieldset>
+
+        <label class="setting">
+          <span><strong>Don't ask again</strong><small>Check “Don't show this again”</small></span>
+          <input id="checkCheckbox" type="checkbox" role="switch">
+        </label>
+      </section>
+
+      <section>
+        <label class="setting">
+          <span><strong>Sync across devices</strong><small>Use your browser account for settings and statistics</small></span>
+          <input id="syncEnabled" type="checkbox" role="switch">
+        </label>
+      </section>
+    </div>
 
     <footer>Estimated at 12 seconds saved per handled prompt.</footer>
   </main>

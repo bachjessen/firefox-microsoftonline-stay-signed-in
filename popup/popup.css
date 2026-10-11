@@ -50,6 +50,7 @@ input { accent-color: AccentColor; }
 }
 
 section > .setting:first-child { margin-top: 0; }
+[hidden] { display: none; }
 .setting > span { display: grid; gap: 3px; }
 .setting strong { font-weight: 600; }
 .setting input { flex: 0 0 auto; }
