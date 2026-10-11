@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Stay signed in</title>
+  <title>Stay Signed In, Actually</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <main>
     <header>
-      <small>STAY SIGNED IN</small>
+      <small>STAY SIGNED IN, ACTUALLY</small>
       <h1 id="saved">0 seconds saved</h1>
       <p id="count">0 prompts handled</p>
     </header>
 
     <section>
       <label class="setting">
-        <span><strong>Enable automation</strong><small>Handle the Microsoft prompt automatically</small></span>
+        <span><strong>Enable automation</strong><small>Handle the sign-in prompt automatically</small></span>
         <input id="automationEnabled" type="checkbox" role="switch">
       </label>
     </section>
@@ -34,16 +34,9 @@
           <input id="checkCheckbox" type="checkbox" role="switch">
         </label>
       </section>
-
-      <section>
-        <label class="setting">
-          <span><strong>Sync across devices</strong><small>Use your browser account for settings and statistics</small></span>
-          <input id="syncEnabled" type="checkbox" role="switch">
-        </label>
-      </section>
     </div>
 
-    <footer>Estimated at 12 seconds saved per handled prompt.</footer>
+    <footer>All settings and statistics stay in Firefox on this device.</footer>
   </main>
   <script src="popup.js"></script>
 </body>
