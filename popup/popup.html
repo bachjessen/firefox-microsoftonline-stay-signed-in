@@ -22,7 +22,11 @@
         <label><input type="radio" name="response" value="none"> Do nothing</label>
       </fieldset>
     </section>
-    <p class="muted">Estimated at 12 seconds saved per handled prompt. Data stays on this device.</p>
+    <section>
+      <label class="row"><span>Sync across devices</span><input id="syncEnabled" type="checkbox"></label>
+      <p class="muted">Uses your browser account to sync settings and prompt statistics. Off by default.</p>
+    </section>
+    <p class="muted">Estimated at 12 seconds saved per handled prompt.</p>
   </main>
   <script src="popup.js"></script>
 </body>
