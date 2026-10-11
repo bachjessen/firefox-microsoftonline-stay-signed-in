@@ -28,7 +28,7 @@ jobs:
       - name: Build extension
         run: npm run build
       - name: Submit listed release to Mozilla Add-ons
-        run: npx web-ext sign --channel=listed --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
+        run: npx web-ext sign --channel=listed --amo-metadata=.github/amo-metadata.json --ignore-files test-page.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/** --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
         env:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
