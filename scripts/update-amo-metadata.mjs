@@ -39,7 +39,7 @@ const response = await fetch(
       Authorization: `JWT ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(metadta)
+    body: JSON.stringify(metadata),
   },
 );
 
