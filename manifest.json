@@ -3,7 +3,7 @@
   "name": "Microsoft Online: Stay signed in",
   "version": "1.1.0",
   "description": "Automatically confirms Microsoft's 'Stay signed in?' prompt.",
-  "homepage_url": "https://github.com/wtimme/firefox-microsoftonline-stay-signed-in",
+  "homepage_url": "https://github.com/bachjessen/firefox-microsoftonline-stay-signed-in",
   "icons": {
     "48": "icons/done_all_FILL0_wght400_GRAD0_opsz48.png"
   },
