@@ -1,1 +1,63 @@
-:root{color-scheme:light dark;font:menu;background:Canvas;color:CanvasText}*{box-sizing:border-box}body{margin:0;width:310px}main{padding:16px}header{border-bottom:1px solid color-mix(in srgb,CanvasText 16%,transparent);padding-bottom:14px}small{color:#0a84ff;font-weight:700;letter-spacing:.12em}h1{font-size:20px;margin:6px 0}p{margin:4px 0}section{display:grid;gap:12px;padding:14px 0}section+section{border-top:1px solid color-mix(in srgb,CanvasText 16%,transparent)}.stat,.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.stat span,.muted,legend{color:GrayText;font-size:12px}button{border:0;border-radius:6px;padding:9px;background:#0a84ff;color:white;font:inherit;font-weight:600}button:disabled{opacity:.6}fieldset{display:grid;gap:8px;border:0;padding:0;margin:0}fieldset label{display:flex;gap:8px}
+:root {
+  color-scheme: light dark;
+  font: menu;
+  background: Canvas;
+  color: CanvasText;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; width: 320px; }
+main { padding: 16px; }
+header { padding-bottom: 16px; }
+small { display: block; color: GrayText; font-size: 11px; }
+header small { color: AccentColor; font-weight: 700; letter-spacing: .12em; }
+h1 { margin: 6px 0 4px; font-size: 20px; }
+p { margin: 0; color: GrayText; }
+
+section {
+  padding: 16px 0;
+  border-top: 1px solid color-mix(in srgb, CanvasText 16%, transparent);
+}
+
+fieldset {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  margin-bottom: 10px;
+  color: GrayText;
+  font-size: 12px;
+}
+
+fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input { accent-color: AccentColor; }
+
+.setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+section > .setting:first-child { margin-top: 0; }
+[hidden] { display: none; }
+.setting > span { display: grid; gap: 3px; }
+.setting strong { font-weight: 600; }
+.setting input { flex: 0 0 auto; }
+
+footer {
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, CanvasText 16%, transparent);
+  color: GrayText;
+  font-size: 11px;
+}

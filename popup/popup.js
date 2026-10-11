@@ -1,5 +1,7 @@
 const SECONDS_SAVED_PER_PROMPT = 12;
-const DEFAULTS = {checkCheckbox:true,response:"yes"};
+const DEFAULTS = {automationEnabled:true,checkCheckbox:true,response:"yes"};
+const automationToggle = document.querySelector("#automationEnabled");
+const automationOptions = document.querySelector("#automationOptions");
 const checkbox = document.querySelector("#checkCheckbox");
 const syncToggle = document.querySelector("#syncEnabled");
 
@@ -30,6 +32,8 @@ async function render() {
   const current = await state();
   document.querySelector("#count").textContent = `${current.totalCount} ${current.totalCount === 1 ? "prompt" : "prompts"} handled`;
   document.querySelector("#saved").textContent = `${duration(current.totalCount * SECONDS_SAVED_PER_PROMPT)} saved`;
+  automationToggle.checked = current.automationEnabled;
+  automationOptions.hidden = !current.automationEnabled;
   checkbox.checked = current.checkCheckbox;
   syncToggle.checked = current.syncEnabled;
   document.querySelector(`input[name="response"][value="${current.response}"]`).checked = true;
@@ -40,6 +44,9 @@ async function activeArea() {
   return syncEnabled ? browser.storage.sync : browser.storage.local;
 }
 
+automationToggle.addEventListener("change", async () => {
+  (await activeArea()).set({automationEnabled: automationToggle.checked});
+});
 checkbox.addEventListener("change", async () => (await activeArea()).set({checkCheckbox: checkbox.checked}));
 document.querySelectorAll('input[name="response"]').forEach((radio) => radio.addEventListener("change", async () => {
   if (radio.checked) (await activeArea()).set({response: radio.value});
@@ -51,10 +58,10 @@ syncToggle.addEventListener("change", async () => {
 
   if (syncToggle.checked) {
     const synced = await browser.storage.sync.get({handledCounts:{},...DEFAULTS});
-    await browser.storage.sync.set({checkCheckbox:local.checkCheckbox,response:local.response,handledCounts:{...synced.handledCounts,[id]:Math.max(synced.handledCounts[id] || 0,local.handledCount)}});
+    await browser.storage.sync.set({automationEnabled:local.automationEnabled,checkCheckbox:local.checkCheckbox,response:local.response,handledCounts:{...synced.handledCounts,[id]:Math.max(synced.handledCounts[id] || 0,local.handledCount)}});
   } else {
     const synced = await browser.storage.sync.get({handledCounts:{},...DEFAULTS});
-    await browser.storage.local.set({checkCheckbox:synced.checkCheckbox,response:synced.response,handledCount:synced.handledCounts[id] || 0});
+    await browser.storage.local.set({automationEnabled:synced.automationEnabled,checkCheckbox:synced.checkCheckbox,response:synced.response,handledCount:synced.handledCounts[id] || 0});
   }
 
   await browser.storage.local.set({syncEnabled: syncToggle.checked});
