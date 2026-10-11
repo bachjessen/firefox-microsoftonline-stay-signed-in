@@ -30,9 +30,9 @@ npx web-ext run
 
 ## Releases
 
-CI validates every push and pull request and uploads an unsigned ZIP artifact. Pushing a tag matching the manifest version, such as `v1.1.0`, creates a GitHub release and submits the extension to Mozilla Add-ons for listed signing.
+CI validates every push and pull request and uploads an unsigned ZIP artifact. Releases are manual and restricted to the repository owner. The release workflow submits the extension to Mozilla Add-ons for unlisted signing, so it is not published in the public Firefox Add-ons directory.
 
-Configure these GitHub Actions repository secrets before tagging a release:
+Configure these GitHub Actions repository secrets:
 
 - `AMO_JWT_ISSUER`
 - `AMO_JWT_SECRET`
