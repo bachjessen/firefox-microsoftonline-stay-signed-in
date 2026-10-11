@@ -1,4 +1,7 @@
 {
+  "categories": [
+    "privacy-security"
+  ],
   "version": {
     "license": "MPL-2.0"
   }
