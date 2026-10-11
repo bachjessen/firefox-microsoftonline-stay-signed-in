@@ -9,24 +9,34 @@
 <body>
   <main>
     <header>
-      <small>STAY SIGNED IN</small>
+      <p class="eyebrow">STAY SIGNED IN</p>
       <h1 id="saved">0 seconds saved</h1>
-      <p id="count">0 prompts handled</p>
+      <p id="count" class="summary">0 prompts handled</p>
     </header>
-    <section>
-      <label class="row"><span>Check “Don't show this again”</span><input id="checkCheckbox" type="checkbox"></label>
-      <fieldset>
-        <legend>Response</legend>
-        <label><input type="radio" name="response" value="yes"> Press Yes</label>
-        <label><input type="radio" name="response" value="no"> Press No</label>
-        <label><input type="radio" name="response" value="none"> Do nothing</label>
+
+    <section aria-labelledby="automation-title">
+      <h2 id="automation-title">When the prompt appears</h2>
+      <fieldset class="choice-group">
+        <legend class="visually-hidden">Choose an automatic response</legend>
+        <label class="choice"><input type="radio" name="response" value="yes"><span><strong>Stay signed in</strong><small>Automatically choose Yes</small></span></label>
+        <label class="choice"><input type="radio" name="response" value="no"><span><strong>Don't stay signed in</strong><small>Automatically choose No</small></span></label>
+        <label class="choice"><input type="radio" name="response" value="none"><span><strong>Ask me every time</strong><small>Leave the prompt untouched</small></span></label>
       </fieldset>
+      <label class="setting-row">
+        <span><strong>Hide future prompts</strong><small>Check “Don't show this again”</small></span>
+        <span class="switch"><input id="checkCheckbox" type="checkbox"><span aria-hidden="true"></span></span>
+      </label>
     </section>
-    <section>
-      <label class="row"><span>Sync across devices</span><input id="syncEnabled" type="checkbox"></label>
-      <p class="muted">Uses your browser account to sync settings and prompt statistics. Off by default.</p>
+
+    <section aria-labelledby="sync-title">
+      <h2 id="sync-title">Data</h2>
+      <label class="setting-row">
+        <span><strong>Sync across devices</strong><small>Use your browser account for settings and statistics</small></span>
+        <span class="switch"><input id="syncEnabled" type="checkbox"><span aria-hidden="true"></span></span>
+      </label>
     </section>
-    <p class="muted">Estimated at 12 seconds saved per handled prompt.</p>
+
+    <footer>Time saved is estimated at 12 seconds per handled prompt.</footer>
   </main>
   <script src="popup.js"></script>
 </body>
