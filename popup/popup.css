@@ -55,6 +55,44 @@ section > .setting:first-child { margin-top: 0; }
 .setting strong { font-weight: 600; }
 .setting input { flex: 0 0 auto; }
 
+input[role="switch"] {
+  appearance: none;
+  width: 36px;
+  height: 20px;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, CanvasText 28%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, CanvasText 18%, Canvas);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+input[role="switch"]::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 2px;
+  border-radius: 50%;
+  background: CanvasText;
+  transition: transform 120ms ease;
+}
+
+input[role="switch"]:checked {
+  border-color: AccentColor;
+  background: AccentColor;
+}
+
+input[role="switch"]:checked::before {
+  transform: translateX(16px);
+  background: Canvas;
+}
+
+input[role="switch"]:focus-visible {
+  outline: 2px solid AccentColor;
+  outline-offset: 2px;
+}
+
 footer {
   padding-top: 14px;
   border-top: 1px solid color-mix(in srgb, CanvasText 16%, transparent);
