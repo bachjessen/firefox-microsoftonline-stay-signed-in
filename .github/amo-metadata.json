@@ -3,6 +3,10 @@
     "privacy-security"
   ],
   "version": {
-    "license": "MPL-2.0"
+    "license": "MPL-2.0",
+    "release_notes": {
+      "en-US": "Initial private release. Automatically selects Don't show this again and confirms the Microsoft Online Stay signed in prompt. Runs only on the relevant Microsoft sign-in page and collects, stores, and transmits no user data."
+    },
+    "approval_notes": "Unlisted extension intended for personal use. Runs only on https://login.microsoftonline.com/common/SAS/ProcessAuth. The readable content script selects the DontShowAgain checkbox and clicks the submit input, with a 15-second timeout. No data collection, storage, transmission, analytics, telemetry, remote code, external services, transpilation, bundling, minification, or obfuscation."
   }
 }

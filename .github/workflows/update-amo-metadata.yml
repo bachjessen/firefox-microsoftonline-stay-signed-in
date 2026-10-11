@@ -1,0 +1,26 @@
+name: Update AMO metadata
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    if: ${{ github.actor == github.repository_owner }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Update AMO version metadata
+        run: node scripts/update-amo-metadata.mjs
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+          AMO_ADDON_ID: microsoft-online-stay-signed-in@bachjessen.github.io
+          AMO_VERSION: 1.1.0
