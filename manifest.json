@@ -12,7 +12,7 @@
     "default_icon": {"48": "icons/done_all_FILL0_wght400_GRAD0_opsz48.png"}
   },
   "content_scripts": [{
-    "matches": ["https://login.microsoftonline.com/common/SAS/ProcessAuth"],
+    "matches": ["https://login.microsoftonline.com/*"],
     "js": ["stay-signed-in.js"]
   }],
   "browser_specific_settings": {
