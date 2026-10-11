@@ -1,42 +1,42 @@
-function waitForElementToAppear(locateElementHandler) {
-    return new Promise((resolve) => {
-        var waitInterval;
-        var isElementPresent = false;
+const CHECKBOX_NAME = "DontShowAgain";
+const POLL_INTERVAL_MS = 250;
+const TIMEOUT_MS = 15_000;
 
-        function attemptToFindElement() {
-            if (isElementPresent) {
-                return;
-            }
+function waitForElement(findElement) {
+  return new Promise((resolve, reject) => {
+    const startedAt = Date.now();
 
-            let element = locateElementHandler();
-            if (!element) {
-                return;
-            } else {
-                // Stop the interval immediately.
-                isElementPresent = true;
-                clearInterval(waitInterval);
+    const check = () => {
+      const element = findElement();
+      if (element) {
+        resolve(element);
+        return;
+      }
 
-                resolve(element);
-            }
-        }
+      if (Date.now() - startedAt >= TIMEOUT_MS) {
+        reject(new Error("Timed out waiting for the Microsoft sign-in prompt"));
+        return;
+      }
 
-        waitInterval = setInterval(attemptToFindElement, 500);
-    });
+      window.setTimeout(check, POLL_INTERVAL_MS);
+    };
+
+    check();
+  });
 }
 
-function markCheckboxAsChecked() {
-    waitForElementToAppear(() => { return document.getElementsByName('DontShowAgain')[0] })
-        .then(checkbox => {
-            checkbox.checked = true;
-        })
-        .then(submitForm);
+async function confirmStaySignedIn() {
+  const checkbox = await waitForElement(() =>
+    document.querySelector(`input[name="${CHECKBOX_NAME}"]`),
+  );
+  checkbox.click();
+
+  const submitButton = await waitForElement(() =>
+    document.querySelector('input[type="submit"]'),
+  );
+  submitButton.click();
 }
 
-function submitForm() {
-    waitForElementToAppear(() => { return Array.from(document.getElementsByTagName('input')).filter(element => element.type === 'submit')[0] })
-        .then(submitButton => {
-            submitButton.click();
-        });
-}
-
-markCheckboxAsChecked();
+confirmStaySignedIn().catch((error) => {
+  console.debug("Microsoft Online: Stay signed in:", error.message);
+});

@@ -1,0 +1,13 @@
+{
+  "name": "microsoft-online-stay-signed-in",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Firefox extension that automatically confirms Microsoft's stay-signed-in prompt.",
+  "scripts": {
+    "lint": "web-ext lint --ignore-files test-page.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**",
+    "build": "web-ext build --overwrite-dest --ignore-files test-page.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**"
+  },
+  "devDependencies": {
+    "web-ext": "^8.9.0"
+  }
+}

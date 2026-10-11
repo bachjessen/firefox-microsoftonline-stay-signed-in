@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-web-ext build --ignore-files \
-    "test-page.html" \
-    "CHANGELOG.md" \
-    "screenshot.png" \
-    "build.sh"
+npx web-ext build   --overwrite-dest   --ignore-files   "test-page.html"   "CHANGELOG.md"   "screenshot.png"   "build.sh"   "package.json"   "package-lock.json"   ".github/**"

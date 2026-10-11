@@ -1,13 +1,20 @@
 # Changelog
-All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+All notable changes are documented here. This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-11
+
+### Changed
+
+- Modernized the extension script and added a bounded wait timeout.
+- Added reproducible npm-based linting and packaging.
+- Added GitHub Actions for validation, release packaging, and Mozilla Add-ons submission.
+- Refreshed project documentation.
+
 ## [1.0.0] - 2023-01-17
 
-The initial release 🎉
+### Added
 
-[1.0.0]: https://codeberg.org/apfelkompott/firefox-microsoftonline-stay-signed-in/src/tag/1.0.0
+- Initial release.

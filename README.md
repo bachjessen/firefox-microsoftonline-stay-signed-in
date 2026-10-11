@@ -1,61 +1,48 @@
 # Microsoft Online: Stay signed in
 
-A Firefox add-on to skip the pesky "Stay signed in?" page in Microsoft Online's login flow.
+A small Firefox extension that automatically confirms Microsoft's **Stay signed in?** prompt. It selects **Don't show this again** and clicks **Yes** when the prompt appears.
 
-When logging in to Microsoft Online (e.g. in order to access your work email inbox),
-depending on the configuration, you need to go through a few steps (e.g. entering username/password, OTP).
-At the very end of this flow, you are asked whether you wanted to stay signed in.
-For me, at least, this is _always_ the case, and having to confirm this every time that I am logging in
-quickly gets tiresome.
+[Install from Firefox Add-ons](https://addons.mozilla.org/firefox/addon/ms-online-stay-signed-in/)
 
-<p align="center" style="font-size:20px">
-  <a href="https://addons.mozilla.org/firefox/addon/ms-online-stay-signed-in/" target="_blank">
-    View on the 🦊 Firefox extension directory
-  </a>
-</p>
+![Microsoft's Stay signed in prompt](screenshot.png)
 
-![Screenshot of the "Stay signed in?" page](./screenshot.png)
+## Privacy and permissions
 
-This addon automatically ticks the "Don't show this again" checkbox and clicks "Yes" for you,
-making sure that you only see the screen for a brief moment and, most importantly, that you
-do not need to interact with it at all.
+The extension runs only on `login.microsoftonline.com` and does not collect, store, or transmit data. It needs access to that site solely to interact with the stay-signed-in prompt.
 
-## How to test the addon
+## Development
 
-After cloning the repository, you can use the `test-page.html` file for testing the add-on.
-The page contains easy-to-follow steps on how to debug the redirects.
+Requirements: Node.js 22 and npm.
 
-To confirm that it is working with the actual (live) flow, do the following:
+```sh
+npm ci
+npm run lint
+npm run build
+```
 
-1. From your checkout, run `web-ext run`. This opens a new Firefox window with the add-on installed.
-2. In that new window, visit https://outlook.office.com/mail
+For a temporary Firefox profile:
 
-## How to package the addon
+```sh
+npx web-ext run
+```
 
-1. Install `web-ext` (see [their GitHub README][web-ext])
-2. From your checkout, run the build script: `./build.sh`
+`test-page.html` provides a local manual test for the delayed checkbox and submit button.
 
-## Source code checklist (Firefox addon review)
+## Releases
 
-- [x] **Did you use any build tools?** No.
-- [x] **Does your package include source code for any private repositories or frameworks used in your add-on?** All of the code is open source. It does not contain any frameworks.
-- [x] **Operation system used for the build:** macOS 13.0.1
-- [x] **Details of any specific versions of tools or utilities needed:** There are none. A simple text editor will suffice.
-- [x] **Links to any tools or utilities that need to be downloaded:** n/a
-- [x] **Guidance for installing any downloaded tools and utilities, for example, links to online instructions:** n/a
-- [x] **instructions for building your add-on code or details of any scripts provided:** n/a
-- [x] **Does your package include your build script?** I do not have a build script. The instructions on how to build are part of this README.
+CI validates every push and pull request and uploads an unsigned ZIP artifact. Pushing a tag matching the manifest version, such as `v1.1.0`, creates a GitHub release and submits the extension to Mozilla Add-ons for listed signing.
 
-## Attributions
+Configure these GitHub Actions repository secrets before tagging a release:
 
-The icon is taken from the [Google Material Design iconset](https://fonts.google.com/icons),
-and is used under the terms of the
-[Creative Commons Attribution-ShareAlike](https://creativecommons.org/licenses/by-sa/3.0/) license.
+- `AMO_JWT_ISSUER`
+- `AMO_JWT_SECRET`
+
+Create them in the Mozilla Add-ons Developer Hub. Mozilla review and signing happen after submission; the workflow does not treat its source ZIP as a signed XPI.
+
+## Attribution
+
+The icon comes from [Google Material Symbols](https://fonts.google.com/icons) and is used under the [Creative Commons Attribution-ShareAlike 3.0 license](https://creativecommons.org/licenses/by-sa/3.0/).
 
 ## License
 
-This addon is published under the [Mozilla Public License, version 2.0][license].
-
-[safe-link]: https://docs.microsoft.com/en-us/microsoft-365/business-video/safe-links?view=o365-worldwide
-[web-ext]: https://github.com/mozilla/web-ext
-[license]: https://www.mozilla.org/en-US/MPL/2.0/
+Released under the [Mozilla Public License 2.0](https://www.mozilla.org/MPL/2.0/).
