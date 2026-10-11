@@ -4,6 +4,14 @@ All notable changes are documented here. This project follows [Semantic Versioni
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-11
+
+### Added
+
+- Added a compact settings and statistics popup.
+- Added configurable checkbox handling and Yes, No, or no automatic response.
+- Added local manual timing samples, handled-prompt count, and estimated time saved.
+
 ## [1.1.0] - 2026-10-11
 
 ### Changed

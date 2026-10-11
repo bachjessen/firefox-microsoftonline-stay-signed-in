@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Stay signed in</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <small>STAY SIGNED IN</small>
+      <h1 id="saved">0 seconds saved</h1>
+      <p id="count">0 prompts handled</p>
+    </header>
+    <section>
+      <label class="row"><span>Check “Don't show this again”</span><input id="checkCheckbox" type="checkbox"></label>
+      <fieldset>
+        <legend>Response</legend>
+        <label><input type="radio" name="response" value="yes"> Press Yes</label>
+        <label><input type="radio" name="response" value="no"> Press No</label>
+        <label><input type="radio" name="response" value="none"> Do nothing</label>
+      </fieldset>
+    </section>
+    <p class="muted">Estimated at 12 seconds saved per handled prompt. Data stays on this device.</p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

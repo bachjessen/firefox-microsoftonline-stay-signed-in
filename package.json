@@ -1,6 +1,6 @@
 {
   "name": "microsoft-online-stay-signed-in",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "description": "Firefox extension that automatically confirms Microsoft's stay-signed-in prompt.",
   "scripts": {
