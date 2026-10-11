@@ -45,7 +45,7 @@ jobs:
           if-no-files-found: error
 
       - name: Publish listed release to Firefox Add-ons
-        run: npx web-ext sign --channel=listed --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/** --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
+        run: npx web-ext sign --channel=listed --amo-metadata=.github/amo-metadata.json --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/** --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
         env:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
