@@ -1,42 +1,61 @@
-const CHECKBOX_NAME = "DontShowAgain";
-const POLL_INTERVAL_MS = 250;
+const CHECKBOX_SELECTOR = 'input[name="DontShowAgain"]';
+const YES_SELECTOR = "#idSIButton9, input[type='submit'][value='Yes']";
+const NO_SELECTOR = "#idBtn_Back, input[type='button'][value='No']";
+const POLL_MS = 250;
 const TIMEOUT_MS = 15_000;
+const DEFAULTS = {
+  checkCheckbox: true,
+  response: "yes",
+  measureNext: false,
+  handledCount: 0,
+  sampleCount: 0,
+  totalManualMs: 0,
+};
 
-function waitForElement(findElement) {
+function waitFor(selector) {
   return new Promise((resolve, reject) => {
     const startedAt = Date.now();
-
     const check = () => {
-      const element = findElement();
-      if (element) {
-        resolve(element);
-        return;
-      }
-
-      if (Date.now() - startedAt >= TIMEOUT_MS) {
-        reject(new Error("Timed out waiting for the Microsoft sign-in prompt"));
-        return;
-      }
-
-      window.setTimeout(check, POLL_INTERVAL_MS);
+      const element = document.querySelector(selector);
+      if (element) return resolve(element);
+      if (Date.now() - startedAt >= TIMEOUT_MS) return reject(new Error(`Timed out waiting for ${selector}`));
+      window.setTimeout(check, POLL_MS);
     };
-
     check();
   });
 }
 
-async function confirmStaySignedIn() {
-  const checkbox = await waitForElement(() =>
-    document.querySelector(`input[name="${CHECKBOX_NAME}"]`),
-  );
-  checkbox.click();
-
-  const submitButton = await waitForElement(() =>
-    document.querySelector('input[type="submit"]'),
-  );
-  submitButton.click();
+async function settings() {
+  return {...DEFAULTS, ...(await browser.storage.local.get(DEFAULTS))};
 }
 
-confirmStaySignedIn().catch((error) => {
-  console.debug("Microsoft Online: Stay signed in:", error.message);
-});
+async function recordManualSample(button, startedAt) {
+  await browser.storage.local.set({measureNext: false});
+  button.addEventListener("click", async () => {
+    const current = await settings();
+    await browser.storage.local.set({
+      sampleCount: current.sampleCount + 1,
+      totalManualMs: current.totalManualMs + performance.now() - startedAt,
+    });
+  }, {once: true});
+}
+
+async function handlePrompt() {
+  const checkbox = await waitFor(CHECKBOX_SELECTOR);
+  const yesButton = await waitFor(YES_SELECTOR);
+  const current = await settings();
+
+  if (current.measureNext) {
+    await recordManualSample(yesButton, performance.now());
+    return;
+  }
+
+  if (current.checkCheckbox && !checkbox.checked) checkbox.click();
+  if (current.response === "none") return;
+
+  const button = current.response === "no" ? await waitFor(NO_SELECTOR) : yesButton;
+  await browser.storage.local.set({handledCount: current.handledCount + 1});
+  button.click();
+}
+
+handlePrompt().catch((error) => console.debug("Stay signed in:", error.message));

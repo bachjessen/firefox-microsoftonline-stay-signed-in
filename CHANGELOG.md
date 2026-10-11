@@ -1,8 +1,16 @@
 # Changelog
 
-All notable changes are documented here. This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+All notable changes are documed here. This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
+
+## [1.2.0] - 2026-10-11
+
+### Added
+
+- Added a compact settings and statistics popup.
+- Added configurable checkbox handling and Yes, No, or no automatic response.
+- Added local manual timing samples, handled-prompt count, and estimated time saved.
 
 ## [1.1.0] - 2026-10-11
 

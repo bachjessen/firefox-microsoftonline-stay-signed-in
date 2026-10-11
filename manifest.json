@@ -1,30 +1,24 @@
 {
   "manifest_version": 2,
   "name": "Microsoft Online: Stay signed in",
-  "version": "1.1.0",
-  "description": "Automatically confirms Microsoft's 'Stay signed in?' prompt.",
+  "version": "1.2.0",
+  "description": "Controls Microsoft's 'Stay signed in?' prompt and tracks locally estimated time saved.",
   "homepage_url": "https://github.com/bachjessen/firefox-microsoftonline-stay-signed-in",
-  "icons": {
-    "48": "icons/done_all_FILL0_wght400_GRAD0_opsz48.png"
+  "icons": {"48": "icons/done_all_FILL0_wght400_GRAD0_opsz48.png"},
+  "permissions": ["storage"],
+  "browser_action": {
+    "default_title": "Stay signed in",
+    "default_popup": "popup/popup.html",
+    "default_icon": {"48": "icons/done_all_FILL0_wght400_GRAD0_opsz48.png"}
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://login.microsoftonline.com/common/SAS/ProcessAuth"
-      ],
-      "js": [
-        "stay-signed-in.js"
-      ]
-    }
-  ],
+  "content_scripts": [{
+    "matches": ["https://login.microsoftonline.com/common/SAS/ProcessAuth"],
+    "js": ["stay-signed-in.js"]
+  }],
   "browser_specific_settings": {
     "gecko": {
       "id": "microsoft-online-stay-signed-in@bachjessen.github.io",
-      "data_collection_permissions": {
-        "required": [
-          "none"
-        ]
-      }
+      "data_collection_permissions": {"required": ["none"]}
     }
   }
 }

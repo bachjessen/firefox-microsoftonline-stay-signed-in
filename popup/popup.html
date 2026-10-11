@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Stay signed in</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header><small>STAY SIGNED IN</small><h1 id="saved">Measure your time saved</h1><p id="count"></p></header>
+    <section>
+      <div class="stat"><span>Average manual time</span><strong id="average">Not measured</strong></div>
+      <button id="measure" type="button">Measure next prompt</button>
+      <p id="measureStatus" class="muted"></p>
+    </section>
+    <section>
+      <label class="row"><span>Check “Don't show this again”</span><input id="checkCheckbox" type="checkbox"></label>
+      <fieldset>
+        <legend>Response</legend>
+        <label><input type="radio" name="response" value="yes"> Press Yes</label>
+        <label><input type="radio" name="response" value="no"> Press No</label>
+        <label><input type="radio" name="response" value="none"> Do nothing</label>
+      </fieldset>
+    </section>
+    <p class="muted">Settings and statistics stay in Firefox on this device.</p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
