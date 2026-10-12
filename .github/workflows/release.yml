@@ -1,13 +1,43 @@
-name: Public Publishing Disabled
+name: Public Firefox Release
 
 on:
   workflow_dispatch:
 
-permissions: {}
+permissions:
+  contents: read
+
+concurrency:
+  group: public-firefox-release
+  cancel-in-progress: false
 
 jobs:
-  disabled:
-    if: ${{ false }}
+  publish:
+    if: ${{ github.actor == github.repository_owner && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Public publishing is intentionally unavailable for this personal fork."
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit production dependencies
+        run: npm run audit
+
+      - name: Lint Firefox extension
+        run: npm run lint
+
+      - name: Build browser distributions
+        run: npm run build
+
+      - name: Submit listed Firefox update to AMO
+        run: npx web-ext sign --source-dir=dist/firefox --artifacts-dir=web-ext-artifacts --channel=listed --approval-timeout=0 --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
+        env:
+          AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+          AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
