@@ -1,3 +1,4 @@
+const extensionApi = globalThis.browser ?? globalThis.chrome;
 const SECONDS_SAVED_PER_PROMPT = 12;
 const DEFAULTS = {automationEnabled: true, checkCheckbox: true, response: "yes", handledCount: 0};
 const automationToggle = document.querySelector("#automationEnabled");
@@ -11,7 +12,7 @@ function duration(seconds) {
 }
 
 async function render() {
-  const current = await browser.storage.local.get(DEFAULTS);
+  const current = await extensionApi.storage.local.get(DEFAULTS);
   document.querySelector("#count").textContent = `${current.handledCount} ${current.handledCount === 1 ? "prompt" : "prompts"} handled`;
   document.querySelector("#saved").textContent = `${duration(current.handledCount * SECONDS_SAVED_PER_PROMPT)} saved`;
   automationToggle.checked = current.automationEnabled;
@@ -23,16 +24,16 @@ async function render() {
 }
 
 automationToggle.addEventListener("change", async () => {
-  await browser.storage.local.set({automationEnabled: automationToggle.checked});
+  await extensionApi.storage.local.set({automationEnabled: automationToggle.checked});
 });
 
 checkbox.addEventListener("change", async () => {
-  await browser.storage.local.set({checkCheckbox: checkbox.checked});
+  await extensionApi.storage.local.set({checkCheckbox: checkbox.checked});
 });
 
 document.querySelectorAll('input[name="response"]').forEach((radio) => radio.addEventListener("change", async () => {
-  if (radio.checked) await browser.storage.local.set({response: radio.value});
+  if (radio.checked) await extensionApi.storage.local.set({response: radio.value});
 }));
 
-browser.storage.onChanged.addListener(render);
+extensionApi.storage.onChanged.addListener(render);
 render();
