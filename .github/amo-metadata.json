@@ -1,10 +1,9 @@
 {
-  "categories": ["privacy-security"],
   "version": {
     "license": "MPL-2.0",
     "release_notes": {
-      "en-US": "Adds Chrome and Edge support through a separate Manifest V3 build while retaining Firefox compatibility. Settings and counters remain in local browser storage."
+      "en-US": "Private self-distributed update. Settings and counters remain in local browser storage."
     },
-    "approval_notes": "Listed extension update. Runs only on https://login.microsoftonline.com/. Uses readable source code, local browser storage, no telemetry, no analytics, no remote code, and no external services."
+    "approval_notes": "Unlisted extension for personal use. Runs only on https://login.microsoftonline.com/. Uses readable source code, local browser storage, no telemetry, no analytics, no remote code, and no external services."
   }
 }

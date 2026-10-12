@@ -1,15 +1,16 @@
 {
   "name": "stay-signed-in-actually",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Personal browser extension that handles the recurring Microsoft stay-signed-in prompt.",
   "scripts": {
-    "lint": "web-ext lint --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json manifest.chromium.json dist/** .github/**",
+    "lint": "web-ext lint --ignore-files test-page.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json manifest.chromium.json dist/** .github/**",
     "build": "node scripts/build-browsers.mjs",
-    "build:firefox": "web-ext build --source-dir dist/firefox --artifacts-dir web-ext-artifacts --filename stay-signed-in-actually-firefox-1.0.1.zip --overwrite-dest",
-    "build:chromium": "web-ext build --source-dir dist/chromium --artifacts-dir web-ext-artifacts --filename stay-signed-in-actually-chromium-mv3-1.0.1.zip --overwrite-dest",
+    "build:firefox": "web-ext build --source-dir dist/firefox --artifacts-dir web-ext-artifacts --filename stay-signed-in-actually-firefox-1.0.2.zip --overwrite-dest",
+    "build:chromium": "web-ext build --source-dir dist/chromium --artifacts-dir web-ext-artifacts --filename stay-signed-in-actually-chromium-mv3-1.0.2.zip --overwrite-dest",
     "build:all": "npm run build && npm run build:firefox && npm run build:chromium",
-    "audit": "npm audit --omit=dev --audit-level=high"
+    "audit": "npm audit --omit=dev --audit-level=high",
+    "check:private-release": "node scripts/check-private-release.mjs"
   },
   "devDependencies": {
     "web-ext": "10.7.0"

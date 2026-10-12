@@ -24,6 +24,8 @@ jobs:
         run: npm ci
       - name: Audit production dependencies
         run: npm run audit
+      - name: Enforce private-only Firefox publishing
+        run: npm run check:private-release
       - name: Lint Firefox extension
         run: npm run lint
       - name: Build Firefox and Chromium packages
