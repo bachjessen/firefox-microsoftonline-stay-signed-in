@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Stay Signed In, Actually",
+  "version": "1.0.0",
+  "description": "Controls the 'Stay signed in?' prompt on Microsoft sign-in pages using local-only settings.",
+  "homepage_url": "https://github.com/bachjessen/stay-signed-in-actually",
+  "icons": {"48": "icons/done_all_FILL0_wght400_GRAD0_opsz48.png"},
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Stay Signed In, Actually",
+    "default_popup": "popup/popup.html",
+    "default_icon": {"48": "icons/done_all_FILL0_wght400_GRAD0_opsz48.png"}
+  },
+  "content_scripts": [{
+    "matches": ["https://login.microsoftonline.com/*"],
+    "js": ["stay-signed-in.js"]
+  }]
+}

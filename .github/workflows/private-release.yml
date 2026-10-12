@@ -29,16 +29,19 @@ jobs:
 
       - name: Read extension version
         id: version
-        run: echo "version=$(node -p "require('./manifest.json').version")" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(node -p \"require('./manifest.json').version\")" >> "$GITHUB_OUTPUT"
 
       - name: Audit dependencies
-        run: npm audit --omit=dev --audit-level=high
+        run: npm run audit
 
       - name: Lint extension
         run: npm run lint
 
-      - name: Sign private unlisted update
-        run: npx web-ext sign --channel=unlisted --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/** --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
+      - name: Build browser distributions
+        run: npm run build
+
+      - name: Sign private unlisted Firefox update
+        run: npx web-ext sign --source-dir=dist/firefox --artifacts-dir=web-ext-artifacts --channel=unlisted --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
         env:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}

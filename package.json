@@ -2,10 +2,13 @@
   "name": "stay-signed-in-actually",
   "version": "1.0.0",
   "private": true,
-  "description": "Personal Firefox extension that handles the recurring Microsoft stay-signed-in prompt.",
+  "description": "Personal browser extension that handles the recurring Microsoft stay-signed-in prompt.",
   "scripts": {
-    "lint": "web-ext lint --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**",
-    "build": "web-ext build --overwrite-dest --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json .github/**",
+    "lint": "web-ext lint --ignore-files test-page.html test-page-11oct2026.html CHANGELOG.md screenshot.png build.sh package.json package-lock.json manifest.chromium.json dist/** .github/**",
+    "build": "node scripts/build-browsers.mjs",
+    "build:firefox": "web-ext build --source-dir dist/firefox --artifacts-dir web-ext-artifacts --filename stay-signed-in-actually-firefox-1.0.0.zip --overwrite-dest",
+    "build:chromium": "web-ext build --source-dir dist/chromium --artifacts-dir web-ext-artifacts --filename stay-signed-in-actually-chromium-mv3-1.0.0.zip --overwrite-dest",
+    "build:all": "npm run build && npm run build:firefox && npm run build:chromium",
     "audit": "npm audit --omit=dev --audit-level=high"
   },
   "devDependencies": {

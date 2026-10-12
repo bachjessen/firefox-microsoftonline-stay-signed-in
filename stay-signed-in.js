@@ -1,3 +1,4 @@
+const extensionApi = globalThis.browser ?? globalThis.chrome;
 const CHECKBOX_SELECTOR = 'input[name="DontShowAgain"]';
 const YES_SELECTOR = "#idSIButton9, input[type='submit'][value='Yes']";
 const NO_SELECTOR = "#idBtn_Back, input[type='button'][value='No']";
@@ -19,7 +20,7 @@ function waitFor(selector) {
 }
 
 async function handlePrompt() {
-  const preferences = await browser.storage.local.get(DEFAULTS);
+  const preferences = await extensionApi.storage.local.get(DEFAULTS);
   if (!preferences.automationEnabled) return;
 
   const checkbox = await waitFor(CHECKBOX_SELECTOR);
@@ -27,7 +28,7 @@ async function handlePrompt() {
 
   const selector = preferences.response === "no" ? NO_SELECTOR : YES_SELECTOR;
   const button = await waitFor(selector);
-  await browser.storage.local.set({handledCount: preferences.handledCount + 1});
+  await extensionApi.storage.local.set({handledCount: preferences.handledCount + 1});
   button.click();
 }
 

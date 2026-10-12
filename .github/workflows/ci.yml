@@ -22,13 +22,23 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Lint extension
+      - name: Audit production dependencies
+        run: npm run audit
+      - name: Lint Firefox extension
         run: npm run lint
-      - name: Build extension
-        run: npm run build
-      - name: Upload unsigned package
+      - name: Build Firefox and Chromium packages
+        run: npm run build:all
+      - name: Verify generated manifests
+        run: node -e "const fs=require('fs'); const firefox=JSON.parse(fs.readFileSync('dist/firefox/manifest.json','utf8')); const chromium=JSON.parse(fs.readFileSync('dist/chromium/manifest.json','utf8')); if(firefox.manifest_version!==2||chromium.manifest_version!==3) process.exit(1);"
+      - name: Upload Firefox package
         uses: actions/upload-artifact@v4
         with:
-          name: firefox-extension-unsigned
-          path: web-ext-artifacts/*.zip
+          name: stay-signed-in-actually-firefox-unsigned
+          path: web-ext-artifacts/stay-signed-in-actually-firefox-*.zip
+          if-no-files-found: error
+      - name: Upload Chromium MV3 package
+        uses: actions/upload-artifact@v4
+        with:
+          name: stay-signed-in-actually-chromium-mv3
+          path: web-ext-artifacts/stay-signed-in-actually-chromium-mv3-*.zip
           if-no-files-found: error
