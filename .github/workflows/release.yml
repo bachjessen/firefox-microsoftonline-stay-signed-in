@@ -37,7 +37,7 @@ jobs:
         run: npm run build
 
       - name: Submit listed Firefox update to AMO
-        run: npx web-ext sign --source-dir=dist/firefox --artifacts-dir=web-ext-artifacts --channel=listed --approval-timeout=0 --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
+        run: npx web-ext sign --source-dir=dist/firefox --artifacts-dir=web-ext-artifacts --channel=listed --approval-timeout=0 --amo-metadata=.github/amo-metadata.json --api-key="$AMO_JWT_ISSUER" --api-secret="$AMO_JWT_SECRET"
         env:
           AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
           AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
